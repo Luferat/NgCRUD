@@ -1,9 +1,16 @@
+/* Menu lateral em telas abaixo de "md" */
 @media (max-width: 575.98px) {
     .offcanvas {
         max-width: 280px;
     }
 }
 
+/* Ponteiro nas rotas internas */
+a {
+    cursor: pointer;
+}
+
+/* hover nos itens do menu */
 .nav-item a:hover {
-background-color: rgba(255,255,255,.1);
+    background-color: rgba(255, 255, 255, .1);
 }
