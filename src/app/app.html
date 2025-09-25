@@ -13,16 +13,17 @@
           <li class="nav-item"><a class="nav-link" routerLink="/contacts">Contatos</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="/about">Sobre</a></li>
           <li class="nav-item">
-            <ng-container *ngIf="authService.user$ | async as user; else notAuthenticated">
-              <a class="nav-link" routerLink="/profile">
-                <img [src]="user.photoURL" class="rounded-circle" width="32" height="32" [alt]="user.displayName" />
+
+              @if (authService.user$ | async; as user) {
+              <a class="nav-link" (click)="confirmLogout()">
+                <img [src]="user.photoURL" class="rounded-circle" width="32" height="32" [alt]="user.displayName" [title]="user.displayName" />
               </a>
-            </ng-container>
-            <ng-template #notAuthenticated>
+              } @else {
               <a class="nav-link" (click)="authService.loginWithGoogle()">
                 <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
               </a>
-            </ng-template>
+              }
+
           </li>
         </ul>
       </div>
@@ -52,19 +53,19 @@
 
 
         <li class="nav-item">
-          <ng-container *ngIf="authService.user$ | async as user; else notAuthenticatedOffcanvas">
-            <a class="nav-link" routerLink="/profile" data-bs-dismiss="offcanvas">
-              <img [src]="user.photoURL" class="rounded-circle me-2" width="32" height="32" [alt]="user.displayName" />
-              <span>{{ user.displayName }}</span>
-            </a>
-          </ng-container>
 
-          <ng-template #notAuthenticatedOffcanvas>
-            <a class="nav-link ps-2" (click)="authService.loginWithGoogle()" data-bs-dismiss="offcanvas">
-              <i class="bi bi-person-circle me-2" style="font-size: 1.2rem;"></i>
-              <span>Login</span>
-            </a>
-          </ng-template>
+          @if (authService.user$ | async; as user) {
+          <a class="nav-link ps-2 d-flex align-items-center" (click)="confirmLogout()" data-bs-dismiss="offcanvas">
+            <img [src]="user.photoURL" class="rounded-circle me-2" width="32" height="32" [alt]="user.displayName" [title]="user.displayName" />
+            <span>{{ user.displayName }}</span>
+          </a>
+          } @else {
+          <a class="nav-link ps-2 d-flex align-items-center" (click)="authService.loginWithGoogle()" data-bs-dismiss="offcanvas">
+            <i class="bi bi-person-circle me-2" style="font-size: 2rem;"></i>
+            <span>Login</span>
+          </a>
+          }
+
         </li>
       </ul>
     </div>

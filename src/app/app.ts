@@ -3,7 +3,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterModule } from '@angular/router';
-import { AuthService } from './auth-service'; // Importe o serviço de autenticação
+import { AuthService } from './auth-service';
 
 @Component({
   selector: 'app-root',
@@ -15,5 +15,12 @@ import { AuthService } from './auth-service'; // Importe o serviço de autentica
 export class App {
   title = 'ngcrud';
 
-  constructor(public authService: AuthService) {} // Injetando o serviço Auth
+  constructor(public authService: AuthService) { }
+
+  // Método para confirmar e fazer logout
+  confirmLogout() {
+    if (confirm('Tem certeza que deseja sair?')) {
+      this.authService.logout();
+    }
+  }
 }
