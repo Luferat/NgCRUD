@@ -1,0 +1,19 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <h2>População de Dados</h2>
+      
+      @if (isLoading) {
+        <div class="spinner-border text-primary mt-4" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      }
+
+      @if (feedbackMessage) {
+        <div class="alert mt-4" [ngClass]="{'alert-success': feedbackMessage.includes('sucesso'), 'alert-info': feedbackMessage.includes('já existe'), 'alert-danger': feedbackMessage.includes('erro')}">
+          {{ feedbackMessage }}
+        </div>
+      }
+    </div>
+  </div>
+</div>
