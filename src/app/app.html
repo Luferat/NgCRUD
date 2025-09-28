@@ -14,15 +14,16 @@
           <li class="nav-item"><a class="nav-link" routerLink="/about">Sobre</a></li>
           <li class="nav-item">
 
-              @if (authService.user$ | async; as user) {
-              <a class="nav-link" (click)="confirmLogout()">
-                <img [src]="user.photoURL" class="rounded-circle" width="32" height="32" [alt]="user.displayName" [title]="user.displayName" />
-              </a>
-              } @else {
-              <a class="nav-link" (click)="authService.loginWithGoogle()">
-                <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
-              </a>
-              }
+            @if (authService.user$ | async; as user) {
+            <a class="nav-link" (click)="confirmLogout()">
+              <img [src]="user.photoURL" class="rounded-circle" width="32" height="32" [alt]="user.displayName"
+                   [title]="user.displayName" />
+            </a>
+            } @else {
+            <a class="nav-link" (click)="authService.loginWithGoogle()">
+              <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
+            </a>
+            }
 
           </li>
         </ul>
@@ -56,11 +57,13 @@
 
           @if (authService.user$ | async; as user) {
           <a class="nav-link ps-2 d-flex align-items-center" (click)="confirmLogout()" data-bs-dismiss="offcanvas">
-            <img [src]="user.photoURL" class="rounded-circle me-2" width="32" height="32" [alt]="user.displayName" [title]="user.displayName" />
+            <img [src]="user.photoURL" class="rounded-circle me-2" width="32" height="32" [alt]="user.displayName"
+                 [title]="user.displayName" />
             <span>{{ user.displayName }}</span>
           </a>
           } @else {
-          <a class="nav-link ps-2 d-flex align-items-center" (click)="authService.loginWithGoogle()" data-bs-dismiss="offcanvas">
+          <a class="nav-link ps-2 d-flex align-items-center" (click)="authService.loginWithGoogle()"
+             data-bs-dismiss="offcanvas">
             <i class="bi bi-person-circle me-2" style="font-size: 2rem;"></i>
             <span>Login</span>
           </a>
