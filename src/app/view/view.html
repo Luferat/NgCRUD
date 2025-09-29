@@ -1,0 +1,45 @@
+<!-- src/app/view/view.html -->
+
+@if (thing) {
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <img [src]="thing.photoURL" class="card-img-top" [alt]="thing.name">
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h1 class="card-title text-primary">{{ thing.name }}</h1>
+                <p class="card-text text-muted">ID: {{ thing.id }}</p>
+                <hr>
+                <h5 class="mt-4">Descrição</h5>
+                <p>{{ thing.description }}</p>
+
+                <h5 class="mt-4">Localização</h5>
+                <p>{{ thing.location }}</p>
+
+                <h5 class="mt-4">Proprietário</h5>
+                <p>{{ ownerDisplayName }}</p>
+
+                <h5 class="mt-4">Criado em</h5>
+                <p>{{ thing.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (isOwner) {
+<div class="row mt-4">
+    <div class="col-12 text-center">
+        <a class="btn btn-warning me-2" [routerLink]="['/edit', thing.id]">
+            Editar <i class="bi bi-pencil-square"></i>
+        </a>
+        <button class="btn btn-danger" (click)="onDeleteThing()">
+            Apagar <i class="bi bi-trash-fill"></i>
+        </button>
+    </div>
+</div>
+}
+
+}

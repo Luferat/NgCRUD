@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../services/data-service';
 import { Observable } from 'rxjs';
 import { Thing } from '../models/thing-model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
