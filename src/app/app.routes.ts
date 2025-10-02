@@ -22,8 +22,8 @@ export const routes: Routes = [
     // Página para "popular" a coleção "Things" no Firestore
     { path: 'seed-data', component: SeedData, title: `${siteName} - Cadastro de Coisas` },
 
-    // Página que exibe um item único
-    { path: 'view/:id', component: View },
+    // Página que exibe um item único pelo Id
+    { path: 'view/:id', component: View, title: `$(siteName) - Ver Item` },
 
     // Rota coringa para redirecionar caminhos inválidos ← Sempre a última
     { path: '**', redirectTo: '/home' }
