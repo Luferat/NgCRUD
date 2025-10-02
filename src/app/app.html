@@ -17,7 +17,7 @@
             @if (authService.user$ | async; as user) {
             <a class="nav-link" (click)="confirmLogout()">
               <img [src]="user.photoURL" class="rounded-circle" width="32" height="32" [alt]="user.displayName"
-                   [title]="user.displayName" />
+                   [title]="user.displayName" referrerpolicy="no-referrer" />
             </a>
             } @else {
             <a class="nav-link" (click)="authService.loginWithGoogle()">
@@ -58,7 +58,7 @@
           @if (authService.user$ | async; as user) {
           <a class="nav-link ps-2 d-flex align-items-center" (click)="confirmLogout()" data-bs-dismiss="offcanvas">
             <img [src]="user.photoURL" class="rounded-circle me-2" width="32" height="32" [alt]="user.displayName"
-                 [title]="user.displayName" />
+                 [title]="user.displayName" referrerpolicy="no-referrer" />
             <span>{{ user.displayName }}</span>
           </a>
           } @else {
