@@ -13,7 +13,7 @@ import {
   updateDoc,
 } from '@angular/fire/firestore';
 import { Observable, from, map, catchError, throwError } from 'rxjs';
-import type { FirestoreDataConverter, Timestamp } from 'firebase/firestore';
+import { addDoc, setDoc, type FirestoreDataConverter, type Timestamp } from 'firebase/firestore';
 import { Thing } from '../models/thing-model';
 
 /**
@@ -144,5 +144,29 @@ export class DataService {
     return from(updateDoc(thingRef, { status: newStatus })).pipe(
       catchError(err => throwError(() => err))
     );
+  }
+
+  // Novo método que trata a criação e edição de forma mais segura
+  saveThing(thingId: string | null, thingData: any, ownerId: string): Observable<string> {
+    const thingsCollection = collection(this.firestore, 'Things');
+
+    // Se thingId existe, faz a atualização (EDITAR)
+    if (thingId) {
+      const thingRef = doc(thingsCollection, thingId);
+
+      // **MUDANÇA CRÍTICA:** Usa updateDoc para alterar APENAS os campos fornecidos.
+      // Isso preserva 'createdAt', 'status', 'owner', e 'metadata'.
+      return from(updateDoc(thingRef, thingData)).pipe(map(() => thingId));
+    } else {
+      // Se thingId NÃO existe, faz a criação (NOVO)
+      const newThingData = {
+        ...thingData,
+        owner: ownerId,
+        status: 'ON',
+        createdAt: new Date().toISOString(),
+        metadata: [] // Garante que campos ausentes tenham um valor inicial
+      };
+      return from(addDoc(thingsCollection, newThingData)).pipe(map(docRef => docRef.id));
+    }
   }
 }

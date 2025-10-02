@@ -6,6 +6,7 @@ import { Contacts } from './contacts/contacts';
 import { About } from './about/about';
 import { SeedData } from './seed-data/seed-data';
 import { View } from './view/view';
+import { SaveThing } from './save-thing/save-thing';
 
 // Nome do site para compor o `title`
 const siteName = "NgCRUD";
@@ -23,7 +24,11 @@ export const routes: Routes = [
     { path: 'seed-data', component: SeedData, title: `${siteName} - Cadastro de Coisas` },
 
     // Página que exibe um item único pelo Id
-    { path: 'view/:id', component: View, title: `$(siteName) - Ver Item` },
+    { path: 'view/:id', component: View, title: `${siteName} - Ver Item` },
+
+    // Editar e apagar um item
+    { path: 'edit/:id', component: SaveThing, title: `${siteName} - Editar Item` }, // Rota para Editar Item
+    { path: 'new', component: SaveThing, title: `${siteName} - Cadastrar Item` }, // Rota para Novo Item
 
     // Rota coringa para redirecionar caminhos inválidos ← Sempre a última
     { path: '**', redirectTo: '/home' }

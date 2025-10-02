@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DataService } from '../services/data-service';
 import { Thing } from '../models/thing-model';
 import { Auth, User as FirebaseUser, authState } from '@angular/fire/auth';
+import { Title } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-view',
@@ -19,12 +20,14 @@ export class View implements OnInit {
   ownerDisplayName: string = 'Carregando...';
   currentUser: FirebaseUser | null = null;
   isOwner: boolean = false;
+  siteName = "NgCRUD";
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private dataService: DataService,
-    private auth: Auth
+    private auth: Auth,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +49,9 @@ export class View implements OnInit {
         this.router.navigate(['/home']);
         return;
       }
+
+      // Definir o título da página
+      this.titleService.setTitle(`${this.siteName} - ${this.thing.name}`);
 
       // 2. Verifica se o usuário logado é o proprietário
       if (this.currentUser && this.thing.owner === this.currentUser.uid) {

@@ -1,0 +1,72 @@
+<!-- src\app\save-thing\save-thing.html -->
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">{{ formTitle }}</h2>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm p-4">
+
+        <form [formGroup]="thingForm" (ngSubmit)="onSubmit()">
+
+          <div class="mb-3">
+            <label for="name" class="form-label">Nome da Coisa</label>
+            <input type="text" id="name" formControlName="name" class="form-control"
+                   [class.is-invalid]="thingForm.get('name')?.invalid && thingForm.get('name')?.touched">
+            @if (thingForm.get('name')?.hasError('required') && thingForm.get('name')?.touched) {
+              <div class="invalid-feedback">O nome é obrigatório.</div>
+            }
+            @if (thingForm.get('name')?.hasError('minlength')) {
+              <div class="invalid-feedback">O nome deve ter pelo menos 3 caracteres.</div>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Descrição</label>
+            <textarea id="description" formControlName="description" class="form-control" rows="3"
+                      [class.is-invalid]="thingForm.get('description')?.invalid && thingForm.get('description')?.touched"></textarea>
+            @if (thingForm.get('description')?.hasError('required') && thingForm.get('description')?.touched) {
+              <div class="invalid-feedback">A descrição é obrigatória.</div>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label for="location" class="form-label">Localização</label>
+            <input type="text" id="location" formControlName="location" class="form-control"
+                   [class.is-invalid]="thingForm.get('location')?.invalid && thingForm.get('location')?.touched">
+            @if (thingForm.get('location')?.hasError('required') && thingForm.get('location')?.touched) {
+              <div class="invalid-feedback">A localização é obrigatória.</div>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label for="photoURL" class="form-label">URL da Foto</label>
+            <input type="url" id="photoURL" formControlName="photoURL" class="form-control"
+                   [class.is-invalid]="thingForm.get('photoURL')?.invalid && thingForm.get('photoURL')?.touched">
+            @if (thingForm.get('photoURL')?.hasError('required') && thingForm.get('photoURL')?.touched) {
+              <div class="invalid-feedback">A URL da foto é obrigatória.</div>
+            }
+            @if (thingForm.get('photoURL')?.hasError('pattern')) {
+              <div class="invalid-feedback">Insira um URL válido (começando com http:// ou https://).</div>
+            }
+            @if (thingForm.get('photoURL')?.valid) {
+              <div class="mt-2 text-center">
+                <img [src]="thingForm.get('photoURL')?.value" alt="Pré-visualização" style="max-width: 100%; max-height: 200px; object-fit: cover;">
+              </div>
+            }
+          </div>
+
+          <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-secondary" (click)="router.navigate(['/home'])">
+              <i class="bi bi-arrow-left"></i> Voltar
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="thingForm.invalid">
+              <i class="bi bi-save"></i> {{ isEditMode ? 'Salvar Alterações' : 'Cadastrar' }}
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
